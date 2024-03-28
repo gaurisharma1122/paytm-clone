@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config');
 
 const userAuthMiddleware = (req, res, next) => {
-    const token = request.headers.authorization;
+    const token = req.headers.authorization;
 
     if (!token || !token.startsWith("Bearer ")) {
         return res.status(411).json({});
