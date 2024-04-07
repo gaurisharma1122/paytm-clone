@@ -1,6 +1,6 @@
 const zod = require('zod');
 const jwt = require('jsonwebtoken');
-const { User } = require('../db');
+const { User, Account } = require('../db');
 const { JWT_SECRET } = require('../config');
 
 const userSignup = async (req, res) => {
@@ -27,6 +27,7 @@ const userSignup = async (req, res) => {
         } else {
             //if not then creating a new user
             const newUser = await User.create({ email, password, firstName, lastName });
+            const newAccount = await Account.create({ userId: newUser._id, balance: Math.floor(Math.random() * (901) + 100) });
             return res.status(200).json({
                 message: "User created successfully"
             });
